@@ -1,6 +1,6 @@
 const REMOTE = 'http://localhost:8080/backend';
 
-export default function(path: string, method: string, data: string, token: string) {
+export default function(path: string, method: string, data: string | null, token: string) {
     return fetch(REMOTE + path, {
         method,
         body: data,
