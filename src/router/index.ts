@@ -38,6 +38,27 @@ const routes = [
                 component: () => import('@/components/AddOrder.vue'),
             },
         ],
+        beforeEnter: (to, from, next) => {
+            const userName = localStorage.getItem('userName');
+            if (localStorage.getItem('token') != null && userName != null && userName !== 'Factory') {
+                next();
+            } else {
+                router.go(-1);
+            }
+        },
+    },
+    {
+        path: '/admin',
+        name: 'admin',
+        component: () => import('@/views/Admin.vue'),
+        beforeEnter: (to, from, next) => {
+            const userName = localStorage.getItem('userName');
+            if (localStorage.getItem('token') != null && userName != null && userName === 'Factory') {
+                next();
+            } else {
+                from();
+            }
+        },
     },
 ];
 

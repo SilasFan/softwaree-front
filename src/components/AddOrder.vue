@@ -1,7 +1,7 @@
 <template>
     <div class="w-8/12 ml-auto mr-auto max-w-4xl">
         <h2 class="font-bold text-lg mb-8">创建订单</h2>
-        <el-form>
+        <el-form label-position="top">
             <el-form-item label="芯片类型">
                 <el-input type="text" v-model="order.chipType" />
             </el-form-item>

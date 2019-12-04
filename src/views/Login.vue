@@ -12,8 +12,8 @@
             <el-alert type="error" title="用户名或者密码错误！" center show-icon @close="close" v-show="alerShow"></el-alert>
         </div>
 
-        <el-dialog title="注册账号" :visible="registerShow" width="30%" @close="openRegister">
-            <Register v-on:closeRes="openRegister" />
+        <el-dialog title="注册账号" :visible="registerShow" width="30%" @close="closeRegister">
+            <Register v-on:closeRes="closeRegister" />
         </el-dialog>
     </div>
 </template>
@@ -52,9 +52,11 @@ export default class Login extends Vue {
             } else {
                 localStorage.setItem('token', res.message);
                 localStorage.setItem('userName', this.userName);
-                this.userName = this.password = '';
-                alert('login');
-                // redirect
+                if (this.userName === 'Factory') {
+                    this.$router.push('/admin');
+                } else {
+                    this.$router.push('/customer');
+                }
             }
         });
     }
@@ -64,7 +66,11 @@ export default class Login extends Vue {
     }
 
     public openRegister() {
-        this.registerShow = !this.registerShow;
+        this.registerShow = true;
+    }
+
+    public closeRegister() {
+        this.registerShow = false;
     }
 }
 </script>

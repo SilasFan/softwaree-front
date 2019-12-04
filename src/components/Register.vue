@@ -51,6 +51,7 @@ export default class Register extends Vue {
                 this.message = '用户名已存在！';
                 this.alerShow = true;
             } else {
+                this.$message.success('注册成功！');
                 this.$emit('closeRes');
             }
         });
