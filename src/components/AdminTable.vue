@@ -44,6 +44,7 @@ export default class AdminTable extends Vue {
     @Provide() public detailShow: boolean = false;
     @Provide() public modifyShow: boolean = false;
     @Provide() public anOrder: Order = {};
+    @Provide() private myThis: any = this;
 
     public openDetails() {
         this.detailShow = !this.detailShow;
@@ -78,10 +79,10 @@ export default class AdminTable extends Vue {
         if (token) {
             request('/order/accept/' + row.id, 'POST', null, token).then((res: any) => {
                 if (res.ok) {
-                    this.$message.success('成功接受订单！');
+                    this.myThis.$message.success('成功接受订单！');
                     this.getData();
                 } else {
-                    this.$message.error(res.message);
+                    this.myThis.$message.error(res.message);
                 }
             });
         }
@@ -92,10 +93,10 @@ export default class AdminTable extends Vue {
         if (token) {
             request('/order/' + row.id, 'POST', null, token).then((res: any) => {
                 if (res.ok) {
-                    this.$message.success('成功结算订单！');
+                    this.myThis.$message.success('成功结算订单！');
                     this.getData();
                 } else {
-                    this.$message.error(res.message);
+                    this.myThis.$message.error(res.message);
                 }
             });
         }
@@ -106,10 +107,10 @@ export default class AdminTable extends Vue {
         if (token) {
             request('/order/' + row.id, 'DELETE', null, token).then((res: any) => {
                 if (res.ok) {
-                    this.$message.warning('订单已关闭！');
+                    this.myThis.$message.warning('订单已关闭！');
                     this.getData();
                 } else {
-                    this.$message.error(res.message);
+                    this.myThis.$message.error(res.message);
                 }
             });
         }

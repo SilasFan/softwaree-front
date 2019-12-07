@@ -36,6 +36,7 @@ import request from '../utils/request';
 export default class AddOrder extends Vue {
     @Provide() order: Order = {};
     @Provide() files: any = [];
+    @Provide() myThis: any = this;
 
     get upHeader() {
         const token = localStorage.getItem('token');
@@ -46,12 +47,12 @@ export default class AddOrder extends Vue {
 
     public uploadSuccess(response: any, file: any, list: any) {
         this.order.edafileLocation = response.message;
-        this.$message.success('上传成功！');
+        this.myThis.$message.success('上传成功！');
     }
 
     public createOrder() {
         if (!this.order.edafileLocation) {
-            this.$message.error('没有上传文件！');
+            this.myThis.$message.error('没有上传文件！');
             return;
         }
         let data = JSON.stringify(this.order);
@@ -61,9 +62,9 @@ export default class AddOrder extends Vue {
         if (token) {
             request('/order', 'POST', data, token).then((res: any) => {
                 if (!res.ok) {
-                    this.$message.error(res.message);
+                    this.myThis.$message.error(res.message);
                 } else {
-                    this.$message.success('创建成功！');
+                    this.myThis.$message.success('创建成功！');
                     //this.$router.push('/customer');
                 }
             });

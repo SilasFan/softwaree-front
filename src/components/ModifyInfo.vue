@@ -28,6 +28,7 @@ import request from '../utils/request';
 export default class ModifyInfo extends Vue {
     @Prop() public order!: Order;
     @Provide() public info: OrderInfo = {};
+    @Provide() private myThis: any = this;
 
     public filterInfo(str: string | null | undefined) {
         if (str && str !== undefined) {
@@ -54,9 +55,9 @@ export default class ModifyInfo extends Vue {
         if (token) {
             request('/order/' + this.order.id, 'PUT', data, token).then((res: any) => {
                 if (res.ok) {
-                    this.$message.success('更新成功！');
+                    this.myThis.$message.success('更新成功！');
                 } else {
-                    this.$message.error(res.message);
+                    this.myThis.$message.error(res.message);
                 }
             });
         }

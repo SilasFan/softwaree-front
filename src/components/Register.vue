@@ -23,6 +23,7 @@ export default class Register extends Vue {
     @Provide() public phone: string = '';
     @Provide() public alerShow: boolean = false;
     @Provide() public message: string = '';
+    @Provide() private myThis: any = this;
 
     public close() {
         this.alerShow = false;
@@ -51,7 +52,7 @@ export default class Register extends Vue {
                 this.message = '用户名已存在！';
                 this.alerShow = true;
             } else {
-                this.$message.success('注册成功！');
+                this.myThis.$message.success('注册成功！');
                 this.$emit('closeRes');
             }
         });
